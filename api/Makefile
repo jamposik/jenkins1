@@ -1,3 +1,4 @@
+version = jamposik
 image = 401413892014.dkr.ecr.us-east-1.amazonaws.com/apiapp:marsel-1.1
 
 login:
@@ -11,4 +12,4 @@ push: login
 	@docker push $(image)
 
 deploy:
-	@kubectl apply -f deployment.yaml
+	@cat deployment.yaml | sed "s|IMAGEVERSION|$(version)|g" | kubectl apply -f -
